@@ -3,6 +3,10 @@ library(padr)
 library(akima)
 library(lubridate)
 
+############
+### Akima
+############
+
 ## Interpolation and convert to a dataframe
 dpinterp <- function(df=df) {
   interp_df <- interp(x=df$DateTime_day, y=df$Depth, z=df$Temp, duplicate="strip")
@@ -22,16 +26,30 @@ ctd <- read_csv("2015Prof.csv") %>%
 
 ## Contour plot
 ctd %>%
-  ggplot(aes(x = Date, y = Depth, z = Temp, fill = Temp)) + 
-  geom_tile() + 
+  ggplot(aes(x = Date, y = Depth, z = Temp, fill = Temp)) +
+  geom_tile() +
   scale_y_reverse(expand = c(0,0)) +
   scale_x_date(expand = c(0, 0), date_labels = "%b", date_breaks = "1 month") +
-  stat_contour(aes(fill=..level..), geom="polygon", binwidth=0.005) + 
-  geom_contour(color = "white", alpha = 0.5) + 
-  scale_fill_distiller( 
-    palette="RdYlGn", 
-    na.value="white") + 
-  theme_minimal() 
+  stat_contour(aes(fill=..level..), geom="polygon", binwidth=0.005) +
+  geom_contour(color = "white", alpha = 0.5) +
+  scale_fill_distiller(
+    palette="RdYlGn",
+    na.value="white") +
+  theme_minimal()
+
+
+#############
+### MBA
+##############
+library(MBA)
+
+##Compare to other method Spline on both?
+
+df <- read_csv("2015Prof.csv") %>%
+  thicken("day") %>%
+
+
+
 
 
 
