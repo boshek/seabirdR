@@ -5,7 +5,6 @@ library(lubridate)
 library(MBA)
 library(gridExtra)
 
-
 ############
 ### DATA ###
 ############
@@ -17,6 +16,7 @@ data_df <- read_csv("2015Prof.csv") %>%
 #############################
 ### AKIMA solution linear ###
 #############################
+
 ## Interpolation and convert to a dataframe
 dpinterp <- function(df=df) {
   interp_df <- interp(x=df$DateTime_day, y=df$Depth, z=df$Temp, duplicate="strip", linear = TRUE, nx = 100, ny = 100)
@@ -109,6 +109,7 @@ mba_plt <- df2 %>%
     na.value="white") + 
   labs(title = "MBA package solution") +
   theme_minimal() 
+
 
 #########################
 ### Combine the plots ###
