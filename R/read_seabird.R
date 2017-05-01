@@ -8,17 +8,17 @@
 #' @return A single dataframe containing all the cast dale and a label column indicating the filename of the .cnv file
 
 
-read_seabird = function(autoname = TRUE, recursive = FALSE) {
-  if(length(list.files(pattern="*.cnv", recursive=recursive)) == 0L) {
+read_seabird = function(path = ".", autoname = TRUE, recursive = FALSE) {
+  if(length(list.files(path = ".", pattern="*.cnv", recursive=recursive)) == 0L) {
     message("No .cnv files in search path. Use setwd() to navigate to data directory") } else{
 
   ## Create ctddf to input into
   ctddf <- c()
   #x <- list.files(pattern="*.cnv", recursive=FALSE) ##DEBUG
   ## Loop through and find all the files
-  for (x in list.files(pattern="*.cnv", recursive=recursive)) {
+  for (x in list.files(path = path, pattern="*.cnv", recursive=recursive)) {
     ##Read in entire .cnv file
-    all_content = readLines(x, warn=FALSE)
+    all_content = readLines(paste0(path, x), warn=FALSE)
 
     if(autoname == TRUE) {
       ## Automatically find files name TODO: Could be much more efficient
@@ -43,6 +43,6 @@ read_seabird = function(autoname = TRUE, recursive = FALSE) {
     ctddf <- rbind(ctddf, input)
   }
     message(paste0(length(unique(ctddf$Label))," of ",
-         paste0(length(list.files(pattern="*.cnv", recursive=recursive))), " cnv files in the search path successfully imported"))
+         paste0(length(list.files(path = path, pattern="*.cnv", recursive=recursive))), " cnv files in the search path successfully imported"))
     return(ctddf)
 }}
