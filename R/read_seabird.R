@@ -9,8 +9,8 @@
 
 
 read_seabird = function(path = ".", autoname = TRUE, recursive = FALSE) {
-  if(length(list.files(path = ".", pattern="*.cnv", recursive=recursive)) == 0L) {
-    message("No .cnv files in search path. Use setwd() to navigate to data directory") } else{
+  #if(length(list.files(path = ".", pattern="*.cnv", recursive=recursive)) == 0L) {
+  #  message("No .cnv files in search path. Use setwd() to navigate to data directory") } else{
 
   ## Create ctddf to input into
   ctddf <- c()
@@ -45,4 +45,5 @@ read_seabird = function(path = ".", autoname = TRUE, recursive = FALSE) {
     message(paste0(length(unique(ctddf$Label))," of ",
          paste0(length(list.files(path = path, pattern="*.cnv", recursive=recursive))), " cnv files in the search path successfully imported"))
     return(ctddf)
-}}
+#}
+}
